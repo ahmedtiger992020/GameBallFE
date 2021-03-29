@@ -1,0 +1,61 @@
+<div>
+    <form style="margin-left: 10px;" class="formClass" [formGroup]="bookForm" autocomplete="off" novalidate
+        fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="100px" (ngSubmit)="save(bookForm.value)">
+
+        <p class="title-one">{{(editMode? 'Book Details' :'Add New Book') }}</p>
+
+        <mat-form-field class="full-width-input">
+            <input matInput placeholder="Book Name" formControlName="name" [readonly]="editMode">
+
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input">
+            <input matInput placeholder="Book Price" maxlength="5" (keypress)="numberOnly($event)" formControlName="price"
+                [readonly]="editMode">
+
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input matInput placeholder="Book Category" formControlName="category" [readonly]="editMode">
+
+        </mat-form-field>
+        <mat-form-field class="full-width-input" *ngIf="editMode">
+            <input matInput placeholder="Book Author" formControlName="author" [readonly]="editMode">
+
+        </mat-form-field>
+        <mat-form-field class="w-100" *ngIf="!editMode">
+            <mat-label>Choose author</mat-label>
+
+            <mat-select formControlName='authorId'>
+                <mat-option #mats *ngFor="let author of authorList" [value]="author.id">
+                    {{author.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width-input" *ngIf="editMode">
+            <input matInput placeholder="Book AverageRating" formControlName="avgRating" [readonly]="editMode">
+
+        </mat-form-field>
+
+        <table class="table" *ngIf="bookReview?.length>0">
+            <thead>
+                <tr>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let value of bookReview">
+                    <th scope="col">{{ value.text }}</th>
+                    <th scope="col">{{ value.rating }}</th>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <button mat-raised-button color="primary" *ngIf="!editMode" type="submit">Save Book</button>
+            <button mat-raised-button color="warn" (click)="navigateToList()" type="button">Go To Book List</button>
+        </div>
+
+    </form>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">{{'SpinnerMessage' }} </p>
+</ngx-spinner>

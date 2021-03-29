@@ -1,0 +1,7 @@
+{
+    "FrontEndBaseUrl":"http://localhost:4200",
+    "ApiBaseUrl": "https://localhost:44390",
+    "hubUrl": "https://localhost:44390/notificationHub"
+
+  }
+  

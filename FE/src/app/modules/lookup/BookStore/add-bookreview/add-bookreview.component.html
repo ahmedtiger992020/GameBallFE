@@ -1,0 +1,30 @@
+<div>
+    <form style="margin-left: 10px;" class="formClass" [formGroup]="bookReviewForm" autocomplete="off" novalidate
+        fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="100px"
+        (ngSubmit)="save(bookReviewForm.value)">
+
+        <p class="title-one">Book Review </p>
+
+        <mat-form-field class="w-100">
+            <mat-label>Choose Book</mat-label>
+
+            <mat-select formControlName='bookId'>
+                <mat-option #mats *ngFor="let book of bookList" [value]="book.id">
+                    {{book.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input matInput placeholder="Book Review" formControlName="text">
+
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input matInput placeholder="Book Rating"  maxlength="1" (keypress)="numberOnly($event)" formControlName="rating">
+
+        </mat-form-field>
+
+        <div>
+            <button mat-raised-button color="primary" type="submit">Save Book Review</button>
+            <button mat-raised-button color="warn" routerLink="/" type="button">Go To Book List</button>
+        </div>
+    </form>
+</div>

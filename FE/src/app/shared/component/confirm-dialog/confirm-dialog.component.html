@@ -1,0 +1,21 @@
+<div class="col-md-12">
+    <p class="title-one">{{data.title }}</p>
+
+    <!--
+    <div class="col-md-12">
+        <img class="center" src="assets/img/icon-check.svg">
+    </div> -->
+    <div class="sec-title">
+        <p>{{data.body }}{{data.extrabody}}</p>
+    </div>
+    <div class="col-md-12 m-t-20">
+        <div class="row">
+            <div class="col-md-6">
+                <button mat-button class=" btn-ok text-center" (click)="onConfirmClick()" cdkFocusInitial>{{data.confirmBtnText }}</button>
+            </div>
+            <div class="col-md-6">
+                <button mat-button class=" btn-pirnt pull-right" (click)="onNoClick()">{{data.cancelBtntext }}</button>
+            </div>
+        </div>
+    </div>
+</div>

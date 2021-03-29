@@ -1,0 +1,70 @@
+<div class="col-md-5 ">
+  <div class="col-md-12 mt-2">
+    <button mat-raised-button style="background-color:#3f51b5;color:white;" color="basic" mat-button (click)="navigateToAddPage()"><span class="material-icons">
+      add
+    </span> {{'Add New Book'}} </button>
+  <button class="ml-2" mat-raised-button style="background-color:#161618;color:white;" color="warn" (click)="navigateToAddReviewBook()" type="button">
+    
+    <span class="material-icons">
+      star_rate
+      </span>
+    
+    Add Book Review</button>
+
+
+
+</div>
+<!--Body   -->
+<div class="row">
+  <div class="col-md-12 p-d-0 scroll_y">
+    <table mat-table matSort [dataSource]="dataSource">
+      <!-- Name Column -->
+      <ng-container matColumnDef="Book">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{'Book' }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div>
+            <a><span class="span-edit"><img src="assets/img/eye-24px.svg" alt=""
+                  (click)="navigateToAddEditPage(element.id)" /></span></a>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="BookFilters">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="filter">
+            <div class="w-100">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label> {{ 'Name' }}</mat-label>
+                <input matInput maxlength="90" [(ngModel)]="searchDto.name" (keydown.enter)="loadData()" />
+              </mat-form-field>
+            </div>
+          </div>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="symbolFilters">
+        <th mat-header-cell *matHeaderCellDef>
+
+        </th>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedfilter" [@detailExpand]="Filters ? 'expanded' : 'collapsed'"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <div class="w-100 margin-top10">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="defualtPageSize" [length]="resultsLength"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
